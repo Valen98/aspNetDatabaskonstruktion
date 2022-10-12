@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Create child";
+}
+
+<form method="post" action="@Url.Action("InsertChild", "Home")">
+    <div>
+        <label>PNR: <input type="text" name="PNR" /></label>
+    </div>
+    <div>
+        <label>Förnamn: <input type="text" name="firstname" /></label>
+    </div>
+    <div>
+        <label>Efternamn: <input type="text" name="surname" /></label>
+    </div>
+    <div>
+        <label>Födelsedag: <input type="text" namn="birthday" /></label>
+    </div>
+    <input type="hidden" value="0" namn="kindnessScale"/>
+    <div>
+        <label>Lösenord: <input type="password" namn="pwd"/> </label>
+    </div>
+    <div>
+        <input type="submit" value="Create Child"/>
+    </div>
+</form>

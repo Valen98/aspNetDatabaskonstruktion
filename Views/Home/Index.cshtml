@@ -2,7 +2,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table> 
+    <tr>
+        @foreach(var dataColumn in ViewBag.barnTable.Columns) 
+        {
+            <th>@dataColumn.ColumnName</th>
+        }
+    </tr>
+    @foreach(var barnRow in ViewBag.barnTable.Rows) 
+    {
+        <tr>
+            @for (int i = 0; i < ViewBag.barnTable.Columns.Count; i++)
+            {
+                <td>@barnRow[i]</td>
+        }
+        </tr>
+    }
+</table>
+<a asp-controller="Home" asp-action="CreateChildView">Create Child</a>
