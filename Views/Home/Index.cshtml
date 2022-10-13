@@ -8,6 +8,7 @@
         {
             <th>@dataColumn.ColumnName</th>
         }
+        <th>Delete Child</th>
     </tr>
     @foreach(var barnRow in ViewBag.barnTable.Rows) 
     {
@@ -15,7 +16,36 @@
             @for (int i = 0; i < ViewBag.barnTable.Columns.Count; i++)
             {
                 <td>@barnRow[i]</td>
+            }
+        
+          <td>
+            <form method="post" action="@Url.Action("DeleteChild", "Home")">
+                <input type="hidden" value="@barnRow[0]" name="PNR"/>
+                <input type="hidden" value="@barnRow[1]" name="name"/>
+                <input type="submit" value="Delete Child" />
+            </form>
+              
+          </td>
+        </tr>
+
+    }
+</table>
+
+<table>
+    <tr>
+        @foreach (var childRelationColumn in ViewBag.childRelationTable.Columns)
+        {
+            <th>@childRelationColumn.ColumnName</th>
         }
+    </tr>
+
+    @foreach (var childRelationRow in ViewBag.childRelationTable.Rows)
+    {
+        <tr>
+            @for (int i = 0; i < ViewBag.childRelationTable.Columns.Count; i++)
+            {
+                <td>@childRelationRow[i]</td>
+            }
         </tr>
     }
 </table>

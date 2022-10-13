@@ -28,15 +28,12 @@ namespace B21leowa_DOTNet.Models
 
         public void InsertChild(string PNR, string firstname, string surname, string birthday, int kindnessScale, string pwd)
         {
-            string fullname = String.Concat(firstname, surname);
-            DateTime birthdayDate = Convert.ToDateTime(birthday);
+            string fullname =  firstname + " " + surname;
+            var birthdayDateAndTime = Convert.ToDateTime(birthday);
+            var birthdayDate = birthdayDateAndTime.Date;
 
             MySqlConnection connection = new MySqlConnection(_connectionString);
             connection.Open();
-           
-            Console.WriteLine("THIS IS BEFORE SQL INSERT " + pwd);
-
-            Console.WriteLine("THIS IS PASSWORD ");
             string insertChild = "INSERT INTO barn(PNR, namn, födelseår, snällhetsSkala, pwd) VALUES (@PNR, @name, @birthday, @kindnessScale, @pwd);";
             MySqlCommand sqlCmd = new MySqlCommand(insertChild, connection);
             sqlCmd.Parameters.AddWithValue("@PNR", PNR);
@@ -44,6 +41,19 @@ namespace B21leowa_DOTNet.Models
             sqlCmd.Parameters.AddWithValue("@birthday", birthdayDate);
             sqlCmd.Parameters.AddWithValue("@kindnessScale", kindnessScale);
             sqlCmd.Parameters.AddWithValue("@pwd", pwd);
+            int rows = sqlCmd.ExecuteNonQuery();
+            connection.Close();
+        }
+
+        public void DeleteChild(string PNR, string name)
+        {
+            Console.WriteLine("Delete this user: " + PNR + " " + name + "\n");
+            MySqlConnection connection = new MySqlConnection(_connectionString);
+            connection.Open();
+            string deleteChild = "DELETE FROM barn WHERE PNR = @PNR AND namn = @name;";
+            MySqlCommand sqlCmd = new MySqlCommand(deleteChild, connection);
+            sqlCmd.Parameters.AddWithValue("@PNR", PNR);
+            sqlCmd.Parameters.AddWithValue("@name", name);
             int rows = sqlCmd.ExecuteNonQuery();
             connection.Close();
         }
