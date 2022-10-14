@@ -57,5 +57,18 @@ namespace B21leowa_DOTNet.Models
             int rows = sqlCmd.ExecuteNonQuery();
             connection.Close();
         }
+
+        public DataTable SearchChildren(string name) 
+        {
+            MySqlConnection connection = new MySqlConnection(_connectionString);
+            connection.Open();
+            MySqlDataAdapter sqlCmd = new MySqlDataAdapter("SELECT * FROM barn WHERE namn LIKE @name;", connection);
+            sqlCmd.SelectCommand.Parameters.AddWithValue("@name", "%" + name + "%");
+            DataSet ds = new DataSet();
+            sqlCmd.Fill(ds, "result");
+            DataTable searchChildrenTable = ds.Tables["result"];
+            connection.Close();
+            return searchChildrenTable != null ? searchChildrenTable : new DataTable();
+        }
     }
 }

@@ -4,10 +4,10 @@
 }
 
 <h1>Relations between the children</h1>
-<form method="post" action="@Url.Action("AddRelation", "Home")">
+<form method="post" action="@Url.Action("InsertChildRelation", "Home")">
     <div>
         <label>Child 1</label>
-        <select name="barn1">
+        <select name="namePNR1">
             <option value=""></option>
             @foreach (var row in ViewBag.barnTable.Rows)
             {
@@ -18,7 +18,7 @@
     </div>
     <div>
         <label>Child 2</label>
-        <select name="barn2">
+        <select name="namePNR2">
             <option value=""></option>
             @foreach (var row in ViewBag.barnTable.Rows)
             {
