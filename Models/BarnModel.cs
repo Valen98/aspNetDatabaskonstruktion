@@ -47,7 +47,6 @@ namespace B21leowa_DOTNet.Models
 
         public void DeleteChild(string PNR, string name)
         {
-            Console.WriteLine("Delete this user: " + PNR + " " + name + "\n");
             MySqlConnection connection = new MySqlConnection(_connectionString);
             connection.Open();
             string deleteChild = "DELETE FROM barn WHERE PNR = @PNR AND namn = @name;";
