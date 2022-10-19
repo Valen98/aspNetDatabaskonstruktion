@@ -33,17 +33,17 @@ namespace B21leowa_DOTNet.Models
         {
             MySqlConnection connection = new MySqlConnection(_connectionString);
             connection.Open();
-            string deleteWish = "DELETE FROM önskelista WHERE PNR = @PNR AND årtal = @Year;";
+            string deleteWish = "DELETE FROM önskelista WHERE PNR = @PNR AND årtal = @createdDate;";
             MySqlCommand sqlCmd = new MySqlCommand(deleteWish, connection);
             sqlCmd.Parameters.AddWithValue("@PNR", PNR);
-            sqlCmd.Parameters.AddWithValue("@YEAR", createdDate);
+            sqlCmd.Parameters.AddWithValue("@createdDate", createdDate);
             int rows = sqlCmd.ExecuteNonQuery();
             connection.Close();
         }
         
-        public void CreateWish(string namePNRBirthDay, string description)
+        public void CreateWish(string namePNRBirthday, string description)
         {
-            string[] namePNRBirthDaySplit = namePNRBirthDay.Split(',');
+            string[] namePNRBirthDaySplit = namePNRBirthday.Split(',');
             DateTime now = DateTime.Now;
             DateTime dateOnly = now.Date;
             string dateString = dateOnly.ToString("d");
